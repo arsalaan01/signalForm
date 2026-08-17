@@ -1,0 +1,194 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+  <form #loginForm = "ngForm" (ngSubmit)="submit(loginForm)" class="w-full max-w-md space-y-5 rounded-xl bg-white p-8 shadow-lg">
+
+    <h2 class="text-center text-2xl font-bold text-gray-800">
+      Registration Form
+    </h2>
+
+    <!-- Username -->
+    <div>
+      <label for="user" class="mb-2 block text-sm font-medium text-gray-700">
+        Enter Username
+      </label>
+      <input
+        type="text"
+        id="user"
+        name="username"
+        ngModel
+        placeholder="Username"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+      />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email" class="mb-2 block text-sm font-medium text-gray-700">
+        Enter Email
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        ngModel
+        #email="ngModel"
+        email
+        required
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+      />
+      @if (email.touched && email.errors?.['required']) {
+        <p class="mt-1 text-sm text-red-500">
+          Email is required
+        </p>
+      }
+
+      @if (email.touched && email.errors?.['email']) {
+      <p class="mt-1 text-sm text-red-500">
+        Please enter a valid email address
+      </p>
+      }  
+    </div>
+
+    <!-- Password -->
+    <div>
+      <label for="password" class="mb-2 block text-sm font-medium text-gray-700">
+        Enter Password
+      </label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        ngModel
+        placeholder="Password"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+      />
+    </div>
+
+    <!-- Mobile -->
+    <div>
+      <label for="mobile" class="mb-2 block text-sm font-medium text-gray-700">
+        Enter Mobile No.
+      </label>
+      <input
+        type="tel"
+        id="mobile"
+        name="mobile"
+        ngModel
+        placeholder="Mobile number"
+        class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+      />
+    </div>
+
+    <!-- Gender -->
+    <fieldset>
+      <legend class="mb-2 text-sm font-medium text-gray-700">
+        Select Gender
+      </legend>
+
+      <div class="flex gap-6">
+        <label class="flex cursor-pointer items-center gap-2">
+          <input
+            type="radio"
+            name="gender"
+            ngModel
+            value="male"
+            class="h-4 w-4 accent-blue-600"
+          />
+          <span class="text-gray-700">Male</span>
+        </label>
+
+        <label class="flex cursor-pointer items-center gap-2">
+          <input
+            type="radio"
+            name="gender"
+            value="female"
+            ngModel
+            class="h-4 w-4 accent-blue-600"
+          />
+          <span class="text-gray-700">Female</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- Job Categories -->
+<fieldset>
+  <legend class="mb-2 text-sm font-medium text-gray-700">
+    Select Job Categories
+  </legend>
+
+  <div class="grid grid-cols-2 gap-3">
+
+    <label class="flex cursor-pointer items-center gap-2">
+      <input
+        type="checkbox"
+        name="job_it"
+        ngModel
+        value="IT"
+        class="h-4 w-4 rounded accent-blue-600"
+      />
+      <span class="text-gray-700">IT</span>
+    </label>
+
+    <label class="flex cursor-pointer items-center gap-2">
+      <input
+        type="checkbox"
+        name="job_marketing"
+        ngModel
+        value="Marketing"
+        class="h-4 w-4 rounded accent-blue-600"
+      />
+      <span class="text-gray-700">Marketing</span>
+    </label>
+
+    <label class="flex cursor-pointer items-center gap-2">
+      <input
+        type="checkbox"
+        name="job_accounts"
+        ngModel
+        value="Accounts"
+        class="h-4 w-4 rounded accent-blue-600"
+      />
+      <span class="text-gray-700">Accounts</span>
+    </label>
+
+    <label class="flex cursor-pointer items-center gap-2">
+      <input
+        type="checkbox"
+        name="job_hr"
+        ngModel
+        value="HR"
+        class="h-4 w-4 rounded accent-blue-600"
+      />
+      <span class="text-gray-700">HR</span>
+    </label>
+
+  </div>
+</fieldset>
+
+<!-- Joining Date -->
+<div>
+  <label
+    for="joining_date"
+    class="mb-2 block text-sm font-medium text-gray-700"
+  >
+    Joining Date
+  </label>
+
+  <input
+    type="date"
+    id="joining_date"
+    name="joining_date"
+    ngModel
+    class="w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+  />
+</div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="w-full rounded-lg bg-blue-600 px-4 py-2.5 font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    >
+      Register
+    </button>
+
+  </form>
+</div>

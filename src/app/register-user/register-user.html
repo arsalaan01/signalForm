@@ -1,0 +1,427 @@
+<div class="min-h-screen bg-slate-100 px-4 py-10">
+  <div class="mx-auto max-w-2xl">
+
+    <!-- Header -->
+    <div class="mb-8 text-center">
+      <div
+        class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-lg font-bold text-white"
+      >
+        U
+      </div>
+
+      <h1 class="mt-4 text-3xl font-bold text-slate-900">
+        Create an account
+      </h1>
+
+      <p class="mt-2 text-sm text-slate-500">
+        Enter your details below to register your account.
+      </p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+
+      <form [formGroup]="registerForm">
+
+        <!-- Name -->
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+          <div>
+            <label
+              for="firstName"
+              class="mb-2 block text-sm font-medium text-slate-700"
+            >
+              First name
+              <span class="text-red-500">*</span>
+            </label>
+
+            <input
+              id="firstName"
+              type="text"
+              placeholder="John"
+              formControlName="firstName"
+              class="h-11 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+            @if (registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid) {
+              @if (registerForm.get('firstName')?.errors?.['required']) {
+                <p class="text-red-500 text-sm mt-1">First name is required</p>
+              }
+              @if (registerForm.get('firstName')?.errors?.['minlength']) {
+                <p class="text-red-500 text-sm mt-1">First name must contain atleast 2 characters.</p>
+              }
+              @if (registerForm.get('firstName')?.errors?.['maxlength']) {
+                <p class="text-red-500 text-sm mt-1">First name must contain max 20 characters.</p>
+              }
+              @if (registerForm.get('firstName')?.errors?.['pattern']) {
+                <p class="text-red-500 text-sm mt-1">First name should contain only letters.</p>
+              }
+              
+            }
+          </div>
+
+          <div>
+            <label
+              for="lastName"
+              class="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Last name
+              <span class="text-red-500">*</span>
+            </label>
+
+            <input
+              id="lastName"
+              type="text"
+              placeholder="Doe"
+              formControlName="lastName"
+              class="h-11 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+            @if (registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid) {
+              @if (registerForm.get('lastName')?.errors?.['required']) {
+                <p class="text-red-500 text-sm mt-1">Last name is required</p>
+              }              
+            }
+          </div>
+
+        </div>
+
+        <!-- Email -->
+        <div class="mt-5">
+          <label
+            for="email"
+            class="mb-2 block text-sm font-medium text-slate-700"
+          >
+            Email address
+            <span class="text-red-500">*</span>
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            placeholder="john@example.com"
+            formControlName="email"
+            class="h-11 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          />
+          @if (
+            registerForm.get('email')?.touched &&
+            registerForm.get('email')?.invalid
+          ) {
+
+            @if (registerForm.get('email')?.errors?.['required']) {
+              <p class="text-red-500 text-sm mt-1">
+                Email is required.
+              </p>
+            }
+
+            @if (registerForm.get('email')?.errors?.['email']) {
+              <p class="text-red-500 text-sm mt-1">
+                Enter a valid email address.
+              </p>
+            }
+            @if (registerForm.get('email')?.errors?.['emailExists']) {
+              <p class="text-red-500 text-sm mt-1">
+                This email is already registered.
+              </p>
+            }
+          }
+          <p class="mt-1.5 text-xs text-slate-500">
+            We'll use this email for account-related communication.
+          </p>
+        </div>
+
+        <!-- Phone -->
+        <div class="mt-5">
+          <label
+            for="phone"
+            class="mb-2 block text-sm font-medium text-slate-700"
+          >
+            Phone number
+          </label>
+
+          <input
+            id="phone"
+            type="tel"
+            placeholder="+91 98765 43210"
+            formControlName="contact"
+            class="h-11 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          />
+          @if (
+            registerForm.get('contact')?.touched &&
+            registerForm.get('contact')?.invalid
+          ) {
+
+            @if (registerForm.get('contact')?.errors?.['required']) {
+              <p class="text-red-500 text-sm mt-1">
+                Contact number is required.
+              </p>
+            }
+
+            @if (registerForm.get('contact')?.errors?.['pattern']) {
+              <p class="text-red-500 text-sm mt-1">
+                Contact number must contain exactly 10 digits.
+              </p>
+            }
+          }
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="mt-5">
+          <label
+            for="dateOfBirth"
+            class="mb-2 block text-sm font-medium text-slate-700"
+          >
+            Date of birth
+          </label>
+
+          <input
+            id="dateOfBirth"
+            type="date"
+            formControlName="dateOfBirth"
+            class="h-11 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          />
+          @if (
+            registerForm.get('dateOfBirth')?.touched &&
+            registerForm.get('dateOfBirth')?.errors?.['required']
+          ) {
+            <p class="text-red-500 text-sm mt-1">
+              Date of birth is required.
+            </p>
+          }
+        </div>
+
+        <!-- Gender -->
+        <div class="mt-5">
+          <label
+            for="gender"
+            class="mb-2 block text-sm font-medium text-slate-700"
+          >
+            Gender
+          </label>
+
+          <select
+            id="gender"
+            formControlName="gender"
+            class="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          >
+            <option value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+            <option value="prefer-not-to-say">Prefer not to say</option>
+          </select>
+        </div>
+
+        <!-- Password -->
+        <div class="mt-5">
+          <label
+            for="password"
+            class="mb-2 block text-sm font-medium text-slate-700"
+          >
+            Password
+            <span class="text-red-500">*</span>
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            formControlName="password"
+            class="h-11 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          />
+          @if (
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.invalid
+          ) {
+
+            @if (registerForm.get('password')?.errors?.['required']) {
+              <p class="text-red-500 text-sm mt-1">
+                Password is required.
+              </p>
+            }
+
+            @if (registerForm.get('password')?.errors?.['minlength']) {
+              <p class="text-red-500 text-sm mt-1">
+                Password must contain at least 8 characters.
+              </p>
+            }
+          }
+          <p class="mt-1.5 text-xs text-slate-500">
+            Use at least 8 characters.
+          </p>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mt-5">
+          <label
+            for="confirmPassword"
+            class="mb-2 block text-sm font-medium text-slate-700"
+          >
+            Confirm password
+            <span class="text-red-500">*</span>
+          </label>
+
+          <input
+            id="confirmPassword"
+            type="password"
+            placeholder="Enter your password again"
+            formControlName="confirmPassword"
+            class="h-11 w-full rounded-lg border border-slate-300 px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          />
+          @if (
+            registerForm.get('confirmPassword')?.touched &&
+            registerForm.get('confirmPassword')?.errors?.['required']
+          ) {
+            <p class="text-red-500 text-sm mt-1">
+              Confirm password is required.
+            </p>
+          }
+
+          @if (
+            registerForm.get('confirmPassword')?.touched &&
+            registerForm.errors?.['passwordMismatch']
+          ) {
+            <p class="text-red-500 text-sm mt-1">
+              Passwords do not match.
+            </p>
+          }
+        </div>
+
+        <!-- Account Type -->
+        <div class="mt-6">
+          <p class="mb-3 text-sm font-medium text-slate-700">
+            Account type
+          </p>
+
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+
+            <label
+              class="flex cursor-pointer items-center gap-3 rounded-lg border border-slate-200 p-4 transition hover:border-blue-300 hover:bg-blue-50"
+            >
+              <input
+                type="radio"
+                name="accountType"
+                formControlName="accountType"
+                value="personal"
+                class="h-4 w-4 accent-blue-600"
+              />
+              <div>
+                <p class="text-sm font-medium text-slate-800">
+                  Personal
+                </p>
+
+                <p class="text-xs text-slate-500">
+                  For individual use
+                </p>
+              </div>
+            </label>
+
+            <label
+              class="flex cursor-pointer items-center gap-3 rounded-lg border border-slate-200 p-4 transition hover:border-blue-300 hover:bg-blue-50"
+            >
+              <input
+                type="radio"
+                name="accountType"
+                value="business"
+                formControlName="accountType"
+                class="h-4 w-4 accent-blue-600"
+              />
+
+              <div>
+                <p class="text-sm font-medium text-slate-800">
+                  Business
+                </p>
+
+                <p class="text-xs text-slate-500">
+                  For business use
+                </p>
+              </div>
+            </label>
+
+          </div>
+          @if (
+            registerForm.get('accountType')?.touched &&
+            registerForm.get('accountType')?.errors?.['required']
+          ) {
+            <p class="text-red-500 text-sm mt-2">
+              Please select an account type.
+            </p>
+          }
+        </div>
+
+        <!-- Preferences -->
+        <div class="mt-6">
+          <p class="mb-3 text-sm font-medium text-slate-700">
+            Preferences
+          </p>
+
+          <div class="space-y-3">
+
+            <label class="flex items-start gap-3">
+              <input
+                type="checkbox"
+                formControlName="productUpdates"
+                class="mt-0.5 h-4 w-4 rounded accent-blue-600"
+              />
+
+              <span class="text-sm text-slate-600">
+                Send me product updates and announcements.
+              </span>
+            </label>
+
+            <label class="flex items-start gap-3">
+              <input
+                type="checkbox"
+                formControlName="termsAndCon"
+                class="mt-0.5 h-4 w-4 rounded accent-blue-600"
+              />
+
+              <span class="text-sm text-slate-600">
+                I agree to the
+                <a href="#" class="font-medium text-blue-600 hover:underline">
+                  Terms & Conditions
+                </a>
+                and
+                <a href="#" class="font-medium text-blue-600 hover:underline">
+                  Privacy Policy
+                </a>.
+              </span>
+            </label>
+
+          </div>
+          @if (
+            registerForm.get('termsAndCon')?.touched &&
+            registerForm.get('termsAndCon')?.invalid
+          ) {
+            <p class="text-red-500 text-sm mt-1">
+              You must accept the Terms & Conditions.
+            </p>
+          }
+        </div>
+
+        <!-- Submit -->
+        <div class="mt-8">
+          <button
+            type="button"
+            (click)="onSubmit()"
+            class="w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-100"
+          >
+            Create account
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Login -->
+      <p class="mt-6 text-center text-sm text-slate-500">
+        Already have an account?
+
+        <a
+          href="#"
+          class="font-semibold text-blue-600 hover:text-blue-700 hover:underline"
+        >
+          Sign in
+        </a>
+      </p>
+
+    </div>
+  </div>
+</div>

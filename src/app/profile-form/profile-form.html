@@ -1,0 +1,192 @@
+<form
+  [formGroup]="profileForm"
+  class="mx-auto max-w-2xl space-y-6 rounded-2xl bg-white p-8 shadow-lg"
+>
+
+  <div>
+    <h2 class="text-2xl font-bold text-slate-900">
+      User Profile
+    </h2>
+    <p class="mt-1 text-sm text-slate-500">
+      Enter your details and add your skills.
+    </p>
+  </div>
+
+  <!-- First Name -->
+  <div>
+    <label
+      for="firstName"
+      class="mb-2 block text-sm font-medium text-slate-700"
+    >
+      First Name
+    </label>
+
+    <input
+      id="firstName"
+      type="text"
+      formControlName="firstName"
+      placeholder="Enter your first name"
+      class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+    />
+
+    @if (
+      profileForm.get('firstName')?.touched &&
+      profileForm.get('firstName')?.hasError('required')
+    ) {
+      <p class="mt-1 text-sm text-red-500">
+        First name is required.
+      </p>
+    }
+
+    @if (
+      profileForm.get('firstName')?.touched &&
+      profileForm.get('firstName')?.hasError('minlength')
+    ) {
+      <p class="mt-1 text-sm text-red-500">
+        First name must contain at least 2 characters.
+      </p>
+    }
+  </div>
+
+
+  <!-- Email -->
+  <div>
+    <label
+      for="email"
+      class="mb-2 block text-sm font-medium text-slate-700"
+    >
+      Email
+    </label>
+
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      placeholder="john@example.com"
+      class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+    />
+
+    @if (
+      profileForm.get('email')?.touched &&
+      profileForm.get('email')?.hasError('required')
+    ) {
+      <p class="mt-1 text-sm text-red-500">
+        Email is required.
+      </p>
+    }
+
+    @if (
+      profileForm.get('email')?.touched &&
+      profileForm.get('email')?.hasError('email')
+    ) {
+      <p class="mt-1 text-sm text-red-500">
+        Please enter a valid email address.
+      </p>
+    }
+  </div>
+
+
+  <!-- Skills -->
+  <div class="space-y-4" formArrayName="skills">
+
+    <div class="flex items-center justify-between">
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900">
+          Skills
+        </h3>
+
+        <p class="text-sm text-slate-500">
+          Add one or more skills.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        (click)="addSkill()"
+        class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+      >
+        + Add Skill
+      </button>
+    </div>
+
+
+    @for (
+      skill of skills.controls;
+      track $index;
+      let i = $index
+    ) {
+
+      <div
+        class="rounded-xl border border-slate-200 bg-slate-50 p-4"
+      >
+
+        <div class="flex items-start gap-3">
+
+          <div class="flex-1">
+
+            <label
+              [for]="'skill-' + i"
+              class="mb-2 block text-sm font-medium text-slate-700"
+            >
+              Skill {{ i + 1 }}
+            </label>
+
+            <input
+              [id]="'skill-' + i"
+              type="text"
+              [formControlName]="i"
+              placeholder="Example: Angular"
+              class="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+
+            @if (
+              skill.touched &&
+              skill.hasError('required')
+            ) {
+              <p class="mt-1 text-sm text-red-500">
+                Skill is required.
+              </p>
+            }
+
+          </div>
+
+
+          <button
+            type="button"
+            (click)="removeSkill(i)"
+            [disabled]="skills.length === 1"
+            class="mt-7 rounded-lg border border-red-200 px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Remove
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+
+  <!-- Actions -->
+  <div class="flex items-center justify-end gap-3 border-t border-slate-200 pt-6">
+
+    <button
+      type="button"
+      class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+    >
+      Cancel
+    </button>
+
+    <button
+      type="button"
+      (click)="onSubmit()"
+      class="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-100"
+    >
+      Save Profile
+    </button>
+
+  </div>
+
+</form>

@@ -1,0 +1,62 @@
+<!-- <h2>Users</h2>
+
+<select [formControl]="selectedUserId">
+  <option [ngValue]="null">
+    Select user
+  </option>
+
+  @for (user of users$ | async; track user.id) {
+    <option [ngValue]="user.id">
+      {{ user.name }}
+    </option>
+  }
+</select>
+
+<h2>Posts</h2>
+
+@for (post of posts$ | async; track post.id) {
+  <article>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.body }}</p>
+  </article>
+}
+
+<hr/> -->
+
+<!-- <h2>Search Posts</h2>
+
+<input
+  type="text"
+  [formControl]="searchControl"
+  placeholder="Search post title"
+/>
+
+@for (post of searchResults$ | async; track post.id) {
+  <article>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.body }}</p>
+  </article>
+} -->
+
+<!-- @for (post of postsUsingSwitchMap$ | async; track post.id) {
+  <article>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.body }}</p>
+  </article>
+} -->
+
+<!-- <button (click)="saveSequentially()">
+  Save All
+</button><br/> -->
+<!-- 
+<button (click)="saveClick$.next()">
+  Create Post
+</button> -->
+
+<!-- <button (click)="loadPost()">
+  Load Post
+</button> -->
+
+<button (click)="loadDashboard()">
+  Load Dashboard
+</button>
